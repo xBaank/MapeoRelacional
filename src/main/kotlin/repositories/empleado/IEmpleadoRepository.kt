@@ -1,6 +1,8 @@
-package repositories
+package repositories.empleado
 
-import models.Empleado
-import java.util.UUID
+import repositories.ICrudRepository
+import java.util.*
 
-interface IEmpleadoRepository : ICrudRepository<Empleado,UUID>
+interface IEmpleadoRepository<T> : ICrudRepository<T, UUID> {
+    fun getEmpleadosByDepartamento(id_departamento: UUID): List<T>
+}

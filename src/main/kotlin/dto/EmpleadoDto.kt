@@ -1,3 +1,9 @@
 package dto
 
-data class EmpleadoDto()
+import java.util.*
+
+data class EmpleadoDto(
+    val id: UUID,
+    val nombre: String,
+    val departamentoDto: DepartamentoDto?
+)

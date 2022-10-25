@@ -14,6 +14,9 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
+    implementation("com.h2database:h2:2.1.214")
+    implementation("io.github.microutils:kotlin-logging-jvm:3.0.2")
+    implementation("ch.qos.logback:logback-classic:1.4.4")
 }
 
 tasks.test {
