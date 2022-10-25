@@ -1,8 +1,7 @@
 package repositories.departamento
 
+import models.Departamento
 import repositories.ICrudRepository
 import java.util.*
 
-interface IDepartamentoRepository<T, E> : ICrudRepository<T, UUID> {
-    fun getEmpleadosByDepartamento(id_departamento: UUID): List<E>
-}
+interface IDepartamentoRepository : ICrudRepository<Departamento, UUID>

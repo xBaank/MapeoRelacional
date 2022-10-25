@@ -14,3 +14,5 @@ fun createTables() = """
         CONSTRAINT FK_ID_DEPARTAMENTO foreign key (id_departamento) references Departamento(id)
     )
     """.trimIndent()
+
+//Cambiar id_departamento a nulo?

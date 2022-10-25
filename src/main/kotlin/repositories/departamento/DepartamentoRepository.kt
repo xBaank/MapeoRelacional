@@ -2,35 +2,9 @@ package repositories.departamento
 
 import db.DataBaseManager
 import models.Departamento
-import models.Empleado
 import java.util.*
 
-class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
-    override fun getEmpleadosByDepartamento(id_departamento: UUID): List<Empleado> {
-        val query = "Select * from Empleado where id_departamento = ?"
-        val list = mutableListOf<Empleado>()
-        try {
-            DataBaseManager.open()
-
-            val result =
-                DataBaseManager.select(query, id_departamento)
-                    ?: throw IllegalStateException("El select no puede devolver nulo")
-            while (result.next()) {
-                list.add(
-                    Empleado(
-                        result.getObject("id") as UUID,
-                        result.getString("nombre"),
-                        result.getObject("id_departamento") as UUID
-                    )
-                )
-            }
-
-        }
-        finally {
-            DataBaseManager.close()
-        }
-        return list
-    }
+class DepartamentoRepository : IDepartamentoRepository {
 
     override fun findAll(): List<Departamento> {
         val query = "Select * from Departamento"
@@ -49,8 +23,7 @@ class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
                 )
             }
 
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
         return list
@@ -72,8 +45,7 @@ class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
                 )
             }
 
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
         return departamento
@@ -85,8 +57,7 @@ class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.update(query, item.nombre, item.presupuesto, item.id)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
@@ -97,8 +68,7 @@ class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.update(query, id)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
@@ -109,8 +79,7 @@ class DepartamentoRepository : IDepartamentoRepository<Departamento, Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.insert(query, item.id, item.nombre, item.presupuesto)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }

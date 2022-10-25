@@ -1,9 +1,7 @@
 import db.DataBaseManager
 import db.createTables
-import dto.DepartamentoDto
-import dto.EmpleadoDto
-import orm.DepartamentoMapper
-import orm.EmpleadoMapper
+import models.Departamento
+import models.Empleado
 import repositories.departamento.DepartamentoRepository
 import repositories.empleado.EmpleadoRepository
 import java.util.UUID.randomUUID
@@ -13,18 +11,19 @@ fun main(args: Array<String>) {
     DataBaseManager.createTables(createTables())
     DataBaseManager.close()
 
-    val departamentoRepository = DepartamentoMapper(DepartamentoRepository(), EmpleadoRepository())
-    val empleadosRepository = EmpleadoMapper(EmpleadoRepository(), departamentoRepository)
+    val departamentoRepository = DepartamentoRepository()
+    val empleadosRepository = EmpleadoRepository()
 
 
     val listaDepartamentos = mutableListOf(
-        DepartamentoDto(randomUUID(), "Departamento 1", 1000),
-        DepartamentoDto(randomUUID(), "Departamento 2", 2000),
+        Departamento(randomUUID(), "Departamento 1", 1000),
+        Departamento(randomUUID(), "Departamento 2", 2000),
     )
 
     val listaEmpleados = mutableListOf(
-        EmpleadoDto(randomUUID(), "Empleado 1", listaDepartamentos[0]),
-        EmpleadoDto(randomUUID(), "Empleado 2", listaDepartamentos[1]),
+        Empleado(randomUUID(), "Empleado 1", listaDepartamentos[0].id),
+        Empleado(randomUUID(), "Empleado 2", listaDepartamentos[1].id),
+        Empleado(randomUUID(), "Empleado 3", null),
     )
 
     //insertar

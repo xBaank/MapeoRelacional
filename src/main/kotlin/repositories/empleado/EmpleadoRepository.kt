@@ -5,7 +5,7 @@ import models.Departamento
 import models.Empleado
 import java.util.*
 
-class EmpleadoRepository : IEmpleadoRepository<Empleado> {
+class EmpleadoRepository : IEmpleadoRepository {
     override fun getEmpleadosByDepartamento(id_departamento: UUID): List<Empleado> {
         val query = "SELECT * FROM empleado WHERE id_departamento = ?"
         try {
@@ -22,8 +22,7 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
                 )
             }
             return list
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
@@ -41,13 +40,12 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
                     Empleado(
                         result.getObject("id") as UUID,
                         result.getString("nombre"),
-                        result.getObject("id_departamento") as UUID
+                        result.getObject("id_departamento") as UUID?
                     )
                 )
             }
 
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
         return list
@@ -69,8 +67,7 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
                 )
             }
 
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
         return empleado
@@ -82,8 +79,7 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.update(query, item.nombre, item.id_departamento, item.id)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
@@ -94,8 +90,7 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.delete(query, id)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
@@ -106,8 +101,7 @@ class EmpleadoRepository : IEmpleadoRepository<Empleado> {
         try {
             DataBaseManager.open()
             DataBaseManager.insert(query, item.id, item.nombre, item.id_departamento)
-        }
-        finally {
+        } finally {
             DataBaseManager.close()
         }
     }
