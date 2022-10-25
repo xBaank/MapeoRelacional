@@ -1,0 +1,4 @@
+package orm
+
+class departamentoMapper {
+}
